@@ -95,8 +95,16 @@ namespace UrlParser
                 
             }
             int el = CountA.LastIndexOf(CountA.Max());
+            for(int i = 0; i < ListUrl.Items.Count; i++) 
+            {
+                if(i == el) 
+                {
+                    label.Content += (ListUrl.Items[i].ToString() + " Количество тегов a " + CountA[i] + "\n");
+                }
+                else
+                    label.Content += ListUrl.Items[i].ToString() + " Количество тегов a " +  CountA[i] + "\n";
+            }
             CountA.Clear();
-            label.Content = ListUrl.Items[el].ToString();
         }
 
 
