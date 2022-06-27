@@ -1,0 +1,27 @@
+﻿<Window x:Class="UrlParser.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:UrlParser" 
+        mc:Ignorable="d"
+        Title="UrlParser" Height="450" Width="800">
+    <Grid Background="Chocolate">
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition></ColumnDefinition>
+            <ColumnDefinition></ColumnDefinition>
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition></RowDefinition>
+            <RowDefinition ></RowDefinition>
+        </Grid.RowDefinitions>
+        <Button Grid.Column="0" Grid.Row="0" Height="50" Width="70" HorizontalAlignment="Left" Margin="20,0,0,0" Click="Button_Click">Выбрать</Button>
+        <TextBox x:Name="UrlField" Grid.Column="0" Grid.Row="0" Height="30" Width="200"  ></TextBox>
+        <Button Grid.Column="0" Grid.Row="0" Height="50" Width="100" VerticalAlignment="Bottom" Click="Button_Click_1">Загрузить</Button>
+        <ListBox x:Name="ListUrl" Grid.Column="1" Grid.RowSpan="2" Height="350" Width="300" >
+           
+        </ListBox>
+        <Button Grid.Column="0" Grid.Row="1" Height="50" Width="100" Click="Button_Click_2">Результат</Button>
+        <Label x:Name="label" Grid.Column="0" Grid.Row="1" Height="40" Width="200" VerticalAlignment="Top" Margin="0,20,0,0" FontWeight="Bold"></Label>
+    </Grid>
+</Window>

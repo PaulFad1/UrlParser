@@ -1,0 +1,13 @@
+﻿<Window x:Class="UrlParser.Counting"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:UrlParser"
+        mc:Ignorable="d"
+        Title="Обработка" Height="150" Width="400">
+    <Grid Background="Chocolate">
+        <TextBlock x:Name="text" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="32">Обработка...</TextBlock>
+        <Button Height="30" Width="100" HorizontalAlignment="Right" VerticalAlignment="Bottom" Margin="0,0,10,10" Click="Button_Click">Отмена</Button>
+    </Grid>
+</Window>
