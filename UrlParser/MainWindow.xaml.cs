@@ -6,6 +6,7 @@ using System.Linq;
 using System.Net;
 using System.Net.Http;
 using System.Text;
+using System.Text.RegularExpressions;
 using System.Threading;
 using System.Threading.Tasks;
 using System.Windows;
@@ -33,7 +34,13 @@ namespace UrlParser
             InitializeComponent();
             CountA = new List<int>();
         }
+        private bool IsUrlValid(string url)
+        {
 
+            string pattern = @"^(http|https|ftp|)\://|[a-zA-Z0-9\-\.]+\.[a-zA-Z](:[a-zA-Z0-9]*)?/?([a-zA-Z0-9\-\._\?\,\'/\\\+&amp;%\$#\=~])*[^\.\,\)\(\s]$";
+            Regex reg = new Regex(pattern, RegexOptions.Compiled | RegexOptions.IgnoreCase);
+            return reg.IsMatch(url);
+        }
         private void Button_Click(object sender, RoutedEventArgs e)
         {
             Microsoft.Win32.OpenFileDialog openFileDialog = new Microsoft.Win32.OpenFileDialog();
@@ -51,27 +58,42 @@ namespace UrlParser
         {
             ListUrl.Items.Clear();
             string filename = UrlField.Text;
-            using(StreamReader sr = new StreamReader(filename)) 
+            try
             {
-                string line;
-                while ((line = await sr.ReadLineAsync()) != null) 
+                using (StreamReader sr = new StreamReader(filename))
                 {
+                    string line;
+                    while ((line = await sr.ReadLineAsync()) != null)
+                    {
+                        if(IsUrlValid(line))
+                            ListUrl.Items.Add(line);
 
-                    ListUrl.Items.Add(line);
 
-
+                    }
                 }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Файла по заданному пути нет!");
             }
         }
 
         private async void Button_Click_2(object sender, RoutedEventArgs e)
         {
+            if (ListUrl.Items.IsEmpty == true)
+            {
+                MessageBox.Show("Список Url пуст");
+                return;
+            }
+            CountA.Clear();
+            label.Content = "";
             Cts = new CancellationTokenSource();
             CancellationToken token = Cts.Token;
             Counting counting = new Counting(Cts);
             counting.Show();
             await countofA(token);
             counting.Close();
+            label.Content = "Обработка завершена";
         }
 
         private async Task countofA(CancellationToken token)
@@ -95,16 +117,19 @@ namespace UrlParser
                 
             }
             int el = CountA.LastIndexOf(CountA.Max());
+            
             for(int i = 0; i < ListUrl.Items.Count; i++) 
             {
+
+                ListUrl.Items[i] = ListUrl.Items[i].ToString() + "  Количество тегов:" + CountA[i];
                 if(i == el) 
                 {
-                    label.Content += (ListUrl.Items[i].ToString() + " Количество тегов a " + CountA[i] + "\n");
+                    ListBoxItem listBoxItem = (ListBoxItem)ListUrl.ItemContainerGenerator.ContainerFromIndex(i);
+                    listBoxItem.Foreground = Brushes.Red;
+                    listBoxItem.FontWeight = FontWeights.Bold;
                 }
-                else
-                    label.Content += ListUrl.Items[i].ToString() + " Количество тегов a " +  CountA[i] + "\n";
+                
             }
-            CountA.Clear();
         }
 
 

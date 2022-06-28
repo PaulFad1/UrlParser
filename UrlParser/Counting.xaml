@@ -7,7 +7,7 @@
         mc:Ignorable="d"
         Title="Обработка" Height="150" Width="400">
     <Grid Background="Chocolate">
-        <TextBlock x:Name="text" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="32">Обработка...</TextBlock>
+        <TextBlock x:Name="text" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="28">Обработка...</TextBlock>
         <Button Height="30" Width="100" HorizontalAlignment="Right" VerticalAlignment="Bottom" Margin="0,0,10,10" Click="Button_Click">Отмена</Button>
     </Grid>
 </Window>
